@@ -1,10 +1,10 @@
 def get_first_url():
-    return "https://xkcd.com/1/"
+    return "https://existentialcomics.com/comic/1"
 
 
 def get_title(soup):
     try:
-        title = soup.select("#ctitle")[0].getText()
+        title = soup.select("h3")[0].getText()
     except IndexError:
         title = "no-title"
     return title
@@ -15,7 +15,7 @@ def get_images_url(soup):
     images = []
 
     try:
-        elements = soup.select("#comic img")
+        elements = soup.select(".comicImg")
 
         for i in elements:
             images.append("https:" + i.attrs["src"])
@@ -28,10 +28,13 @@ def get_images_url(soup):
 def get_next_page_url(soup):
 
     try:
-        next_page_url = "https://xkcd.com" + soup.select("ul.comicNav a[rel='next']")[0].attrs["href"]
+        tag = soup.select(".nav-table td")[3]
+        if "a href" in str(tag):
+            link = str(tag).split('a href="')[-1].split('">')[0]
+            next_page_url = "https://existentialcomics.com/" + link
+        else:
+            next_page_url = []
     except IndexError:
-        next_page_url = []
-    if "#" in next_page_url:
         next_page_url = []
 
     return next_page_url
