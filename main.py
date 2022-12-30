@@ -53,6 +53,7 @@ def download(path, title):
         url = done_urls[-1]
         counter = len(done_urls)
 
+    # downloaded comics' urls will be saved in this file
     with open(path + "/archive.txt", "a", encoding="utf-8") as output:
 
         while 1:
@@ -66,6 +67,7 @@ def download(path, title):
                 issue_title = clean(issue_title_raw)
                 images_url = webcomic.get_images_url(soup)
 
+                # some webcomics use multiple files for a single comic
                 page_counter = ""
                 if len(images_url) > 1:
                     page_counter = "-1"
@@ -98,6 +100,9 @@ def scrape_webpage(url):
 
     while True:
 
+        # some webcomics (like the-gamercat) return a ChunkedEncodingError and the webpage cannot be read in its entirety
+        # thus we read the webpage chunk by chunk and we store the source in this variable
+        # the partial source we eventually get is sufficient to download the webcomic, as the error occurs around the last lines of the source
         source = ""
         try:
             with requests.get(url, stream=True) as res:
@@ -105,17 +110,22 @@ def scrape_webpage(url):
                 for chunk in res.iter_content(chunk_size=8192): 
                     source = source + str(chunk)
                 break
-        except requests.exceptions.HTTPError:
-                sleep(0.5)
+        # when the ChunkedEncodingError occurs, break the loop
         except requests.exceptions.ChunkedEncodingError:
                 break
+        # if a HTTPError occurs (notably 429 Too Many Requests), sleep for 0.5 seconds and retry
+        except requests.exceptions.HTTPError:
+                sleep(0.5)
     
+    # replace unicode-escape characters with the utf-8 version
     source = source.encode().decode('unicode-escape')
     soup = bs4.BeautifulSoup(source, "lxml")
     return soup
 
 
 def clean(title_raw):
+
+    # remove Windows forbidden characters for filenames
     title = title_raw.replace("<", "&lt;").replace(">", "&gt;").replace(":", "").replace('"', "'").replace("/", "-").replace("\\", "-").replace("|", "-").replace("?", "&quest;").replace("*", "&ast;")
     return title
 
