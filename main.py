@@ -98,14 +98,20 @@ def scrape_webpage(url):
 
     while True:
 
+        source = ""
         try:
-            res = requests.get(url)
-            res.raise_for_status()
-            break
+            with requests.get(url, stream=True) as res:
+                res.raise_for_status()
+                for chunk in res.iter_content(chunk_size=8192): 
+                    source = source + str(chunk)
+                break
         except requests.exceptions.HTTPError:
-            sleep(0.5)
-
-    soup = bs4.BeautifulSoup(res.text, "lxml")
+                sleep(0.5)
+        except requests.exceptions.ChunkedEncodingError:
+                break
+    
+    source = source.encode().decode('unicode-escape')
+    soup = bs4.BeautifulSoup(source, "lxml")
     return soup
 
 
