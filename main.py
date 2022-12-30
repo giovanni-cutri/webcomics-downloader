@@ -53,7 +53,7 @@ def download(path, title):
         url = done_urls[-1]
         counter = len(done_urls)
 
-    with open(path + "/archive.txt", "a", encoding="utf-8") as f:
+    with open(path + "/archive.txt", "a", encoding="utf-8") as output:
 
         while 1:
 
@@ -62,7 +62,8 @@ def download(path, title):
             if url not in done_urls:
                 done_urls.append(url)
                 print("Downloading issue #" + str(counter) + "...")
-                issue_title = webcomic.get_title(soup)
+                issue_title_raw = webcomic.get_title(soup)
+                issue_title = clean(issue_title_raw)
                 images_url = webcomic.get_images_url(soup)
 
                 page_counter = ""
@@ -80,7 +81,7 @@ def download(path, title):
                     except requests.exceptions.HTTPError:
                         pass
 
-                f.write(url + "\n")
+                output.write(url + "\n")
                 
             url = webcomic.get_next_page_url(soup)
 
@@ -106,6 +107,11 @@ def scrape_webpage(url):
 
     soup = bs4.BeautifulSoup(res.text, "lxml")
     return soup
+
+
+def clean(title_raw):
+    title = title_raw.replace("<", "&lt;").replace(">", "&gt;").replace(":", "").replace('"', "'").replace("/", "-").replace("\\", "-").replace("|", "-").replace("?", "&quest;").replace("*", "&ast;")
+    return title
 
 
 if __name__ == "__main__":
