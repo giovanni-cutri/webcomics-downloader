@@ -28,7 +28,7 @@ def get_images_url(soup):
 def get_next_page_url(soup):
 
     try:
-        next_page_url = "https://xkcd.com" + soup.select("ul.comicNav a[rel='next']")[0].attrs["href"]
+        next_page_url = "https://xkcd.com" + soup.select("a[rel='next']")[0].attrs["href"]
     except IndexError:
         next_page_url = []
     if "#" in next_page_url:
