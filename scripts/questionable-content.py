@@ -13,7 +13,6 @@ def get_images_url(soup):
 
     try:
         elements = soup.select("#strip")
-
         for i in elements:
             images.append("https://questionablecontent.net" + i.attrs["src"][1:])
     except IndexError:

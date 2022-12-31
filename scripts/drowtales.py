@@ -16,7 +16,6 @@ def get_images_url(soup):
 
     try:
         elements = soup.select(".maincontent img")
-
         for i in elements:
             images.append("https://www.drowtales.com/moonless-age/" + i.attrs["src"])
     except IndexError:

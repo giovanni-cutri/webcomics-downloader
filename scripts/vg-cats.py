@@ -13,7 +13,6 @@ def get_images_url(soup):
 
     try:
         elements = soup.select("td img[src^='images/']")
-
         for i in elements:
             images.append("https://www.vgcats.com/comics/" + i.attrs["src"])
     except IndexError:

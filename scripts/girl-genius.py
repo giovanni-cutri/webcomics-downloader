@@ -13,7 +13,6 @@ def get_images_url(soup):
 
     try:
         elements = soup.select("IMG[ALT='Comic']")
-
         for i in elements:
             images.append(i.attrs["src"])
     except IndexError:

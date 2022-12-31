@@ -16,7 +16,6 @@ def get_images_url(soup):
 
     try:
         elements = [soup.select("img")[0]]
-
         for i in elements:
             if len(i.attrs["src"].split("/")) == 1:
                 number_code = "/ff" + str(int(int(soup.select("TITLE")[0].getText().split(" ")[1]) / 100) + 100) + "/"

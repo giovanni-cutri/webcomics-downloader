@@ -16,7 +16,6 @@ def get_images_url(soup):
 
     try:
         elements = soup.select("#comic img")
-
         for i in elements:
             images.append("https:" + i.attrs["src"])
     except IndexError:
@@ -31,6 +30,7 @@ def get_next_page_url(soup):
         next_page_url = "https://xkcd.com" + soup.select("a[rel='next']")[0].attrs["href"]
     except IndexError:
         next_page_url = []
+        
     if "#" in next_page_url:
         next_page_url = []
 

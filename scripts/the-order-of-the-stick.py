@@ -16,7 +16,6 @@ def get_images_url(soup):
 
     try:
         elements = soup.select("td[align='center'] img")
-
         for i in elements:
             source = i.attrs["src"]
             if "comics/" in source:

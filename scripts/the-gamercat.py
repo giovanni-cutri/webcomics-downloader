@@ -16,7 +16,6 @@ def get_images_url(soup):
 
     try:
         elements = soup.select("meta[property='og:image']")
-
         for i in elements:
             images.append(i.attrs["content"])
     except IndexError:

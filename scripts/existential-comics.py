@@ -16,7 +16,6 @@ def get_images_url(soup):
 
     try:
         elements = soup.select(".comicImg")
-
         for i in elements:
             images.append("https:" + i.attrs["src"])
     except IndexError:
