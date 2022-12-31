@@ -9,7 +9,6 @@ from time import sleep
 def main():
     title = parse_arguments()
     path = os.path.join(os.getcwd(), "comics", title)
-    make_folder(path)
     download(path, title)
 
 
@@ -20,19 +19,12 @@ def parse_arguments():
     return args.title
 
 
-def make_folder(path):
-
-    # make folder to store the webcomic
-    try:
-        os.makedirs(path)
-    except OSError:
-        pass
-
-
 def download(path, title):
 
     # import the module for the webcomic chosen by the user
     webcomic = importlib.import_module("scripts." + title, package=None)
+
+    make_folder(path)
 
     url = webcomic.get_first_url()
 
@@ -96,6 +88,15 @@ def download(path, title):
     print("Done.")
 
 
+def make_folder(path):
+
+    # make folder to store the webcomic
+    try:
+        os.makedirs(path)
+    except OSError:
+        pass
+
+    
 def scrape_webpage(url):
 
     while True:
