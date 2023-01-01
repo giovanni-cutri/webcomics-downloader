@@ -66,7 +66,7 @@ def download(path, title):
 
                 for i in images_url:
                     try:
-                        img = requests.get(i).content
+                        img = requests.get(i, headers = {"User-Agent": "XY"}).content
                         ext = i.split(".")[-1]
                         with open(path + "/" + str(counter) + " - " + issue_title + page_counter + "." + ext, 'wb') as f:
                             f.write(img)
@@ -99,6 +99,9 @@ def make_folder(path):
     
 def scrape_webpage(url):
 
+    # use default headers
+    headers = requests.utils.default_headers()
+
     while True:
 
         # some webcomics (like the-gamercat) return a ChunkedEncodingError and the webpage cannot be read in its entirety
@@ -106,7 +109,7 @@ def scrape_webpage(url):
         # the partial source we eventually get is sufficient to download the webcomic, as the error occurs around the last lines of the source
         source = ""
         try:
-            with requests.get(url, stream=True) as res:
+            with requests.get(url, stream=True, headers=headers) as res:
                 res.raise_for_status()
                 for chunk in res.iter_content(chunk_size=8192): 
                     source = source + str(chunk)
@@ -115,8 +118,10 @@ def scrape_webpage(url):
         except requests.exceptions.ChunkedEncodingError:
                 break
         # if a HTTPError occurs (notably 429 Too Many Requests), sleep for 0.5 seconds and retry
+        # also, if there is a 406 response, changing headers will fix it
         except requests.exceptions.HTTPError:
                 sleep(0.5)
+                headers = {"User-Agent": "XY"}
     
     # replace unicode-escape characters with the utf-8 version
     source = source.encode().decode('unicode-escape')
