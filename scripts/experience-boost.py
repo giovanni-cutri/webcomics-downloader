@@ -6,7 +6,7 @@ def get_title(soup):
     try:
         title = soup.select("meta[property='og:title']")[0].attrs["content"].split(" | ")[0]
     except IndexError:
-        title = "no-title"
+        title = "Experience Boost"
     return title
 
 

@@ -6,7 +6,7 @@ def get_title(soup):
     try:
         title = soup.select("#mobilepermalink")[0].attrs["data-clipboard-text"].split("/")[-1]
     except IndexError:
-        title = "no-title"
+        title = "Saturday Morning Breakfast Cereal"
     return title
 
 

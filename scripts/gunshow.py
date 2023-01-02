@@ -6,7 +6,7 @@ def get_title(soup):
     try:
         title = soup.select("title")[0].getText().rsplit(" - ", 1)[-1].strip()
     except IndexError:
-        title = "no-title"
+        title = "Gunshow"
     return title
 
 

@@ -6,7 +6,7 @@ def get_title(soup):
     try:
         title = soup.select("#comic img")[0].attrs["alt"]
     except IndexError:
-        title = "no-title"
+        title = "Nedroid Picture Diary"
     return title
 
 

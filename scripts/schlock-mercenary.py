@@ -6,8 +6,7 @@ def get_title(soup):
     try:
         title = soup.select(".strip-date")[0].getText().strip()
     except IndexError:
-        title = "no-title"
-        
+        title = "Schlock Mercenary"        
     return title
 
 

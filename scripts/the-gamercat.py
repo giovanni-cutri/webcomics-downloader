@@ -6,7 +6,7 @@ def get_title(soup):
     try:
         title = soup.select("meta[property='og:title']")[0].attrs["content"].split(" - The GaMERCaT")[0]
     except IndexError:
-        title = "no-title"
+        title = "The GaMERCaT"
     return title
 
 

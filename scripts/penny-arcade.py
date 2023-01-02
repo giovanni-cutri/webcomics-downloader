@@ -6,7 +6,7 @@ def get_title(soup):
     try:
         title = soup.select("h1")[-1].getText()
     except IndexError:
-        title = "no-title"
+        title = "Penny Arcade"
     return title
 
 

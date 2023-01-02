@@ -6,7 +6,7 @@ def get_title(soup):
     try:
         title = soup.select("b")[-1].getText()
     except IndexError:
-        title = "no-title"
+        title = "The Order of the Stick"
     return title
 
 

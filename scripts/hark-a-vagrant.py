@@ -6,7 +6,7 @@ def get_title(soup):
     try:
         title = soup.select("img[title]")[0].attrs["title"]
     except IndexError:
-        title = "no-title"
+        title = "hark, a vagrant"
     return title
 
 

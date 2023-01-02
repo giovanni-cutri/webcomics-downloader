@@ -6,7 +6,7 @@ def get_title(soup):
     try:
         title = soup.select("title")[0].getText().split("–", 1)[-1].replace("–", "-").strip()
     except IndexError:
-        title = "no-title"
+        title = "Brawl in the Family"
     return title
 
 

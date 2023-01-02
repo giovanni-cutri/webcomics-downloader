@@ -6,7 +6,7 @@ def get_title(soup):
     try:
         title = soup.select("option[selected='selected']")[0].getText() + " - " + soup.select("option[selected='true']")[0].getText() 
     except IndexError:
-        title = "no-title"
+        title = "The Adventures of Dr. McNinja"
     return title
 
 

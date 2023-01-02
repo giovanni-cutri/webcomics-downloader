@@ -6,7 +6,7 @@ def get_title(soup):
     try:
         title = soup.select("div.navbar-title")[0].getText()
     except IndexError:
-        title = "no-title"
+        title = "8-Bit Theater"
     return title
 
 

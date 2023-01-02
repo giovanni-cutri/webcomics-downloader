@@ -6,7 +6,7 @@ def get_title(soup):
     try:
         title = soup.select("img#cc-comic")[0].attrs["title"]
     except IndexError:
-        title = "no-title"
+        title = "El Goonish Shive"
     return title
 
 
