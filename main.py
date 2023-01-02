@@ -66,7 +66,7 @@ def download(path, title):
 
                 for i in images_url:
                     try:
-                        img = requests.get(i, headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0"}).content
+                        img = requests.get(i, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0"}).content
                         ext = i.split(".")[-1]
                         with open(path + "/" + str(counter) + " - " + issue_title + page_counter + "." + ext, 'wb') as f:
                             f.write(img)
@@ -116,12 +116,12 @@ def scrape_webpage(url):
                 break
         # when the ChunkedEncodingError occurs, break the loop
         except requests.exceptions.ChunkedEncodingError:
-                break
+            break
         # if a HTTPError occurs (notably 429 Too Many Requests), sleep for 0.5 seconds and retry
         # also, if there is a 406 response, changing headers will fix it
         except requests.exceptions.HTTPError:
-                sleep(0.5)
-                headers = {"User-Agent": "XY"}
+            sleep(0.5)
+            headers = {"User-Agent": "XY"}
     
     # replace unicode-escape characters with the utf-8 version
     source = source.encode().decode('unicode-escape')
