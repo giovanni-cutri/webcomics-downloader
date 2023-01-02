@@ -2,7 +2,7 @@
 
 # webcomics-downloader
 
-This Python tool can be used to download several webcomics from the Internet. The full list of supported webcomics can be found in the [supported-webcomics.md](https://github.com/giovanni-cutri/webcomics-downloader/blob/main/supported-webcomics.md) file.
+This Python tool can be used to download several webcomics from the Internet. The full list of supported webcomics can be found in the [supported-webcomics](https://github.com/giovanni-cutri/webcomics-downloader/blob/main/supported-webcomics.md) file.
 
 
 ## Dependencies
@@ -21,7 +21,7 @@ pip install -r requirements.txt
 python webcomics-downloader.py [title]
 ```
 
-Replace *title* with the title of the webcomic you want to download, in kebab-case format.
+Replace *[title]* with the title of the webcomic you want to download, in kebab-case format.
 
 
 ## License
