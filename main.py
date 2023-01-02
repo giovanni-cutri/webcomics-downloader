@@ -1,3 +1,4 @@
+import sys
 import argparse
 import os
 import importlib
@@ -7,6 +8,7 @@ from time import sleep
 
 
 def main():
+    sys.path.insert(0, 'scripts/')
     title = parse_arguments()
     path = os.path.join(os.getcwd(), "comics", title)
     download(path, title)
@@ -22,7 +24,7 @@ def parse_arguments():
 def download(path, title):
 
     # import the module for the webcomic chosen by the user
-    webcomic = importlib.import_module("scripts." + title, package=None)
+    webcomic = importlib.import_module(title, package=None)
 
     make_folder(path)
 
