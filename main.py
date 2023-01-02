@@ -66,7 +66,7 @@ def download(path, title):
 
                 for i in images_url:
                     try:
-                        img = requests.get(i, headers = {"User-Agent": "XY"}).content
+                        img = requests.get(i, headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0"}).content
                         ext = i.split(".")[-1]
                         with open(path + "/" + str(counter) + " - " + issue_title + page_counter + "." + ext, 'wb') as f:
                             f.write(img)
