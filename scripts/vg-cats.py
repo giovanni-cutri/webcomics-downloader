@@ -3,7 +3,7 @@ def get_first_url():
 
 
 def get_title(soup):
-    title = "VG Cats!"
+    title = "VG Cats"
     return title
 
 
