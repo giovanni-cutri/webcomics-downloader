@@ -16,7 +16,7 @@ def main():
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("title", help="the title of the webcomic you want to download in snake_case")
+    parser.add_argument("title", help="the title of the webcomic you want to download in kebab-case")
     args = parser.parse_args()
     return args.title
 

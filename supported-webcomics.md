@@ -1,4 +1,4 @@
-| Title                               | snake-case-title                   | Website URL                                     |
+| Title                               | kebab-case-title                   | Website URL                                     |
 |-------------------------------------|------------------------------------|-------------------------------------------------|
 | 8-Bit Theater                       | 8-bit-theater                      | https://www.nuklearpower.com/8-bit-theater/     |
 | 1111 Comics                         | 1111-comics                        | https://www.1111comics.me/                      |
