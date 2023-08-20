@@ -1,5 +1,3 @@
-![Socialify](https://github.com/giovanni-cutri/webcomics-downloader/blob/main/resources/socialify-logo.png)
-
 # webcomics-downloader
 
 This Python tool can be used to download several webcomics from the Internet. The full list of supported webcomics can be found in the [supported-webcomics](https://github.com/giovanni-cutri/webcomics-downloader/blob/main/supported-webcomics.md) file.
