@@ -8,15 +8,25 @@ from time import sleep
 
 def main():
     title = parse_arguments()
+
+    # import_module() function below works better with the kebab-case format
+    if "_" in title:
+        title = snake_to_kebab(title)
+    
     path = os.path.join(os.getcwd(), "comics", title)
     download(path, title)
 
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("title", help="the title of the webcomic you want to download in kebab-case format")
+    parser.add_argument("title", help="the title of the webcomic you want to download")
     args = parser.parse_args()
     return args.title
+
+
+def snake_to_kebab(title):
+    title = title.replace("_", "-")
+    return title
 
 
 def download(path, title):
