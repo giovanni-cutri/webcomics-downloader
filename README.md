@@ -19,7 +19,7 @@ pip install -r requirements.txt
 python webcomics-downloader.py [title]
 ```
 
-Replace *[title]* with the title of the webcomic you want to download, in kebab-case format.
+Replace *[title]* with the title of the webcomic you want to download, either in snake_case or kebab-case format.
 
 
 ## License
