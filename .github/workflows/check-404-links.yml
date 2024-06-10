@@ -25,6 +25,9 @@ jobs:
     - name: Run 404 link checker
       id: run-checker
       run: python check_404_links.py
+      
+    - name: Install GitHub CLI
+      run: sudo apt-get install gh -y
 
     - name: Create Pull Request if broken links are found
       if: failure()
