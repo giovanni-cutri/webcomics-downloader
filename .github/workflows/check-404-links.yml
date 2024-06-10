@@ -41,4 +41,9 @@ jobs:
         git add BROKEN_LINKS_FOUND
         git commit -m 'Found broken links'
         git push origin broken-links-branch
+        gh auth login --with-token < $GITHUB_TOKEN
         gh pr create --title "Fix broken links" --body "This pull request is automatically created to report the presence of 404 links in the repository."
+
+    - name: Clean up
+      if: failure()
+      run: rm BROKEN_LINKS_FOUND
