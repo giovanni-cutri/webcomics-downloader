@@ -1,0 +1,41 @@
+name: Check 404 Links
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at midnight UTC
+
+jobs:
+  check-404:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests beautifulsoup4
+
+    - name: Run 404 link checker
+      id: run-checker
+      run: python check_404_links.py
+
+    - name: Create Pull Request if broken links are found
+      if: failure()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git checkout -b broken-links-branch
+        touch BROKEN_LINKS_FOUND
+        git add BROKEN_LINKS_FOUND
+        git commit -m 'Found broken links'
+        git push origin broken-links-branch
+        gh pr create --title "Fix broken links" --body "This pull request is automatically created to report the presence of 404 links in the repository."
